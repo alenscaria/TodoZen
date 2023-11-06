@@ -173,7 +173,7 @@ a, .btn-link {
 .button-green {
     align-items: center;
     appearance: none;
-    background-image: radial-gradient(100% 100% at 100% 0, #347020 0, #50a450 100%); 
+    background-image: radial-gradient(100% 100% at 100% 0, rgb(152, 198, 137) 0, #50a450 100%); 
     border: 0;
     border-radius: 6px;
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
