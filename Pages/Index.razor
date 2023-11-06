@@ -1,0 +1,86 @@
+﻿@page "/"
+@using TODO_Blazer.Models
+@using TODO_Blazer.Data
+@inject TodoService todoService
+@inject IJSRuntime JsRunTime
+
+
+<PageTitle>Todo</PageTitle>
+
+<div class="inputpanel col d-flex justify-content-center mt-5">
+<input type="text" class="col-5 p-2" placeholder="Enter Todos..." @bind="Todo.TodoItem" @onkeypress="@AddTodoOnEnter">
+<button type="button" class="button-blue ms-3" @onclick="AddTodo">Add</button>
+</div>
+
+<div class="card mt-5 p-4" style="max-height: 300px; overflow-y:auto">
+    <h3 class="text-white bg-secondary text-center mb-3" style="width: 820px;">Todos</h3>
+    <table>
+    @foreach (var todo in TodoObj)
+    {
+        
+           
+            <tr> 
+                 @if(todo.IsCompleted)
+            {
+                <td><s>@todo.TodoItem</s></td>
+
+            }
+            else
+            {
+                <td style="">@todo.TodoItem</td>
+
+            }
+                <td><a class="button-blue btn-sm mb-2" href="EditTodo/@todo.TodoCount">Edit</a></td>
+                <td><button class="button-green btn-sm mb-2" @onclick="()=> todo.IsCompleted=!todo.IsCompleted">Done</button></td>
+            </tr>
+
+          
+        
+        
+    }
+    </table>
+</div>
+
+
+@code
+{
+
+    Todo Todo = new Todo();
+
+     List<Todo> TodoObj=new List<Todo>();
+
+protected override async Task OnInitializedAsync()
+{
+    TodoObj = await todoService.GetAllTodos();
+    
+}
+
+    protected async Task AddTodo()
+    {
+ try {
+
+            // Call the service method to insert the department.
+            await todoService.AddTodo(Todo);
+            await JsRunTime.InvokeVoidAsync("alert","New Todo is Added Successfully.");
+            Todo =new Todo();
+            await OnInitializedAsync();
+
+
+           
+            
+            // Redirect to the department list page.
+        } catch (Exception ex) {
+            @* errorMessage = "An error occurred: " + ex.Message; *@
+        }
+        }
+
+        protected async Task AddTodoOnEnter(KeyboardEventArgs e)
+{
+
+    if ((e.Code == "Enter" || e.Code == "NumpadEnter") && !string.IsNullOrEmpty(Todo.TodoItem))
+    {
+     await AddTodo();
+    }
+}
+
+}

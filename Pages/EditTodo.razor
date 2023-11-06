@@ -1,0 +1,59 @@
+@page "/EditTodo/{id}"
+@using TODO_Blazer.Models
+@using TODO_Blazer.Data
+@inject TodoService todoService
+@inject IJSRuntime JsRunTime
+@inject NavigationManager NavigationManager
+
+
+<PageTitle>Edit Todo</PageTitle>
+
+
+<EditForm Model="@Todo" OnValidSubmit="@UpdateTodo">
+
+        <div class="col-md-8">
+            <div class="form-group mb-3">
+                <label for="Id" class="control-label">Todo ID</label>
+                <InputNumber id="Id" class="form-control" @bind-Value="@Todo.TodoCount" />
+            </div>
+        </div>
+            <div class="row  mb-3">
+                <div class="form-group col">
+                    <label for="FirstName" class="control-label">Todo Item</label>
+                    <InputText id="FirstName" class="form-control" @bind-Value="@Todo.TodoItem" />
+                </div>
+            </div>
+
+             <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="button-blue" @onclick="@UpdateTodo" value="Update" />
+                <a  class="button-red ms-3" href="/">Cancel</a>
+            </div>
+        </div>
+    </div>
+            
+
+</EditForm>
+
+
+@code
+{
+    [Parameter]
+    public string id { get; set; }
+
+    Todo Todo = new Todo();
+    List<Todo> TodoObj = new List<Todo>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Todo = await todoService.GetTodoById(Convert.ToInt32(id));
+    }
+    protected async void UpdateTodo()
+    {
+        await todoService.UpdateTodo(Todo);
+        NavigationManager.NavigateTo("/");
+        await JsRunTime.InvokeVoidAsync("alert", "Successfully Updated.");
+    }
+
+}
