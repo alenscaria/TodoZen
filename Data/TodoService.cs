@@ -57,9 +57,9 @@ namespace TODO_Blazer.Data
             }
         }
 
-        public async Task<bool> DeleteTodo(int id)
+        public async Task<bool> DeleteTodo(Todo todo)
         {
-            var todo = await GetTodoById(id);
+            
             if (todo != null)
             {
                 try

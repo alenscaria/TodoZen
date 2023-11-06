@@ -1,7 +1,7 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family:cursive,sans-serif;
 }
 
 h1:focus {
@@ -80,7 +80,7 @@ a, .btn-link {
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
+    font-family: cursive,sans-serif;
     height: 48px;
     justify-content: center;
     line-height: 1;
@@ -131,7 +131,7 @@ a, .btn-link {
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
+    font-family: cursive,sans-serif;
     height: 48px;
     justify-content: center;
     line-height: 1;
@@ -181,7 +181,7 @@ a, .btn-link {
     color: #fff;
     cursor: pointer;
     display: inline-flex;
-    font-family: "JetBrains Mono", monospace;
+    font-family: cursive,sans-serif;
     height: 48px;
     justify-content: center;
     line-height: 1;
